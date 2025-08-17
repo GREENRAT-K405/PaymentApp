@@ -1,9 +1,10 @@
-const express = require("express");
+require('dotenv').config();
 
-const app = express();
-const port = process.env.PORT || 5000;
+const express = require('express')
+const mainRouter = require("./routes/main")
+const app=express();
 
 
-app.listen(port, ()=>{
-    console.log(`The Server is running on PORT ${port}`)
-})
+app.use("/api/v1", mainRouter);
+
+//whenever this route is called, use the mainRouter logic
