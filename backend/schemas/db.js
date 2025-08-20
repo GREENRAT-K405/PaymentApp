@@ -1,5 +1,9 @@
+//import mongoose
 const mongoose = require("mongoose");
+
 const { minLength, maxLength } = require("zod");
+
+// connect mongoose
 mongoose.connect(process.env.MongoUrl);
 
 const userSchema= new mongoose.Schema({
