@@ -1,10 +1,12 @@
 const express = require('express');
 const zod = require('zod');
-const { User } = require("../schemas/db")
+const { User,Account } = require("../schemas/db")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require('../config');
 const { use } = require('react');
+const { authMiddleware } = require('../middleware');
 const router = express.Router();    //router by express
+import { authMiddleware } from '../middleware';
 
 
 // a zod schema which will be used for authentication
@@ -47,6 +49,15 @@ router.post("/signup", async (req, res) => {
     })
 
     const userId = user._id;
+
+    /// ----- Create new account ------
+
+    await Account.create({
+        userId: userId,
+        balance: 1 + Math.random() * 10000
+    })
+
+		/// -----  ------
 
     const token =jwt.sign({
         userId: userId,
@@ -117,6 +128,30 @@ router.put("/", authMiddleware, async (req, res) => {
         message: "Updated successfully"
     })
 })
+
+
+
+router.get("/bulk", async (req, res) => {
+    const filter = req.query.filter || "";
+
+    const users = await User.find({
+        $or: [{
+            name: {
+                "$regex": filter
+            }
+        }]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            email: user.email,
+            name:user.name,
+            _id: user._id
+        }))
+    })
+})
+
+
 
 
 module.exports = {
