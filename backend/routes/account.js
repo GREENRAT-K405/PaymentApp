@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import { authMiddleware } from "../middleware";
-import { Account } from "../schemas/db";
+const {mongoose} = require('mongoose');
+const { authMiddleware } = require('../middleware');;
+const {Account} = require("../schemas/db")
 
 const express = require("express");
 
@@ -78,3 +78,5 @@ router.post("./transfer", authMiddleware, async (req, res) => {
         message: "Transfer successful"
     });
 });
+
+module.exports = router

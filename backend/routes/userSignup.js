@@ -3,24 +3,24 @@ const zod = require('zod');
 const { User,Account } = require("../schemas/db")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require('../config');
-const { use } = require('react');
 const { authMiddleware } = require('../middleware');
 const router = express.Router();    //router by express
-import { authMiddleware } from '../middleware';
+
 
 
 // a zod schema which will be used for authentication
 const signupSchema = zod.object({
-    name: zod.string().maxLength(50),
-    password: zod.string().minLength(8).maxLength(50),
-    email: zod.email().maxLength(100)
+    name: zod.string().max(50),
+    password: zod.string().min(8).max(50),
+    email: zod.email().max(100)
 })
+
 
 // logic for signup request
 router.post("/signup", async (req, res) => {
 
     // cleaner way to use re.body again and again
-    const body = req.body;4
+    const body = req.body;
 
     //- This uses Zod’s safeParse method to validate the request body against your defined schema
     const success  = signupSchema.safeParse(req.body);
@@ -31,15 +31,16 @@ router.post("/signup", async (req, res) => {
     }
 
     // finding user with same name in db
-    const existingUser = existingUser.findOne({
-        name: body.name
+    const existingUser = await User.findOne({
+        email: body.email
     })
 
-    if (existingUser._id) {
+    if (existingUser) {
         return res.json({
             message: "person's account already exists / incorrect inputs"
         })
     }
+
 
     // created a entry in the database
     const user = await User.create({
@@ -68,6 +69,7 @@ router.post("/signup", async (req, res) => {
         token: token
     })
 })
+
 
 
 
@@ -103,13 +105,12 @@ router.post("/signin",async (req,res)=>{
 })
 
 
+
 const updateBody = zod.object({
 	password: zod.string().optional(),
     firstName: zod.string().optional(),
     lastName: zod.string().optional(),
 })
-
-
 
 
 router.put("/", authMiddleware, async (req, res) => {
@@ -154,6 +155,4 @@ router.get("/bulk", async (req, res) => {
 
 
 
-module.exports = {
-    router
-}
+module.exports = router

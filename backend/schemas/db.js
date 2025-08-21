@@ -9,24 +9,24 @@ mongoose.connect(process.env.MongoUrl);
 const userSchema= new mongoose.Schema({
     userId:{
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     name:{
         type: String,
-        required: true,
+        required: false,
         trim: true,
         maxLength: 50
     },
     email:{
         type: String,
-        required: true,
+        required: false,
         trim: true,
         maxLength: 100
     },
     password:{
         type: String,
-        required: true,
+        required: false,
         minLength: 8,
         maxLength:50
     },
@@ -40,11 +40,11 @@ const accountSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId, // Reference to User model
         ref: 'User',
-        required: true
+        required: false
     },
     balance: {
         type: Number,
-        required: true
+        required: false
     }
 }); 
 
