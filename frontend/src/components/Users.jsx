@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { Button } from "./Button"
+import { Buttoncomp } from "./Buttoncomp"
 
 export const Users = () => {
     // Replace with backend call
     const [users, setUsers] = useState([{
-        firstName: "Harkirat",
-        lastName: "Singh",
+        firstName: "Param",
+        lastName: "Kanada",
         _id: 1
     }]);
 
@@ -38,7 +38,7 @@ function User({user}) {
         </div>
 
         <div className="flex flex-col justify-center h-ful">
-            <Button label={"Send Money"} />
+            <Buttoncomp label={"Send Money"} />
         </div>
     </div>
 }

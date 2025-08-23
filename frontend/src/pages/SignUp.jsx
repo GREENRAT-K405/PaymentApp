@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BottomWarning } from "../components/BottomWarning";
-import { Buttomcomp } from "../components/Buttoncomp";
+import { Buttoncomp } from "../components/Buttoncomp";
 import { Heading } from "../components/Heading";
 import { Inputbox } from "../components/Inputbox";
 import { Subheading } from "../components/Subheading";
@@ -31,7 +31,7 @@ export function SignUp() {
                     setPassword(e.target.value);
                 }} label={"Password"} placeholder={"**********"} />
 
-                <Buttomcomp className="pt-4" label={"Submit"} onPress={async () => {
+                <Buttoncomp className="pt-4" label={"Submit"} onPress={async () => {
 
                     const response = await fetch("http://localhost:3000/api/v1/user/signup", {
                         method: "POST",

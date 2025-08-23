@@ -1,3 +1,3 @@
-export function Buttomcomp({label, onPress}){
+export function Buttoncomp({label, onPress}){
     return <button className="w-full cursor-pointer text-white bg-gray-800 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onClick={onPress} >{label}</button>
 }
