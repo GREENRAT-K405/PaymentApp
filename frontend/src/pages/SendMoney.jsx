@@ -14,12 +14,12 @@ export const SendMoney = () => {
                 class="border h-min text-card-foreground max-w-md p-4 space-y-8 w-96 bg-white shadow-lg rounded-lg"
             >
                 <div class="flex flex-col space-y-1.5 p-6">
-                <h2 class="text-3xl font-bold text-center">Send Money</h2>
+                <h2 class="text-3xl font-bold text-center">Send Money</h2>  
                 </div>
                 <div class="p-6">
                 <div class="flex items-center space-x-4">
                     <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                    <span class="text-2xl text-white">{name[0].toUpperCase()}</span>
+                    <span class="text-2xl text-white">name ? name[0].toUpperCase() : "" </span>
                     </div>
                     <h3 class="text-2xl font-semibold">{name}</h3>
                 </div>
